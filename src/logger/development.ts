@@ -1,13 +1,26 @@
-import winston from "winston";
+import { createLogger, format, transports } from "winston";
 
-export const developmentLogger = winston.createLogger({
-  level: "debug",
-  format: winston.format.combine(
-    winston.format.colorize(),
-    winston.format.timestamp(),
-    winston.format.printf(({ level, message, timestamp }) => {
-      return `${timestamp} [${level}]: ${message}`;
-    })
-  ),
-  transports: [new winston.transports.Console()],
-});
+const developmentLogger = () => {
+  const { combine, colorize, timestamp, printf, metadata, errors } = format;
+
+  const devFormat = printf(({ level, message, timestamp, stack, metadata }) => {
+    const metaKeys = metadata && Object.keys(metadata).length > 0;
+    const metaStr = metaKeys ? " " + JSON.stringify(metadata) : "";
+    const msg = stack ? `${message}\n${stack}` : message;
+    return `${timestamp} [${level}] ${msg}${metaStr}`;
+  });
+
+  return createLogger({
+    level: "debug",
+    format: combine(
+      colorize(),
+      errors({ stack: true }),
+      metadata({ fillExcept: ["message", "level", "timestamp", "stack"] }),
+      timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+      devFormat
+    ),
+    transports: [new transports.Console()],
+  });
+};
+
+export default developmentLogger;

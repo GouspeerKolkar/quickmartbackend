@@ -10,19 +10,28 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.1",
-    "winston": "^3.19.0"
+    "winston": "^3.19.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^25.2.3",
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.11",
+    "ts-node-dev": "^2.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f"
 }
